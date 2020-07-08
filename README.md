@@ -1,2 +1,3 @@
-# AlgoViz
-A web app that visualizes path-finding algorithms.
+# AlgoWiz
+
+This is the home of Algot Wizzim, the algorithm wizard. He vizualizes algorithms.
