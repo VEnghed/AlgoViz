@@ -1,7 +1,11 @@
 {
-  "name": "awda",
-  "description": "TODO",
-  "version": "0.0.1",
+  "name": "alg0viz",
+  "description": "Viktor's pathfinding app",
+  "version": "0.1.0",
+  "engines": {
+    "node": "12.18.2",
+    "npm": "6.14.6"
+  },
   "scripts": {
     "dev": "sapper dev",
     "build": "sapper build --legacy",
