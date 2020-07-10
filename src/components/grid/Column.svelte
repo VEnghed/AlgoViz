@@ -5,8 +5,6 @@
         display: flex;
         flex-direction: column;
         align-content: space-around;
-        margin-right: 1px;
-        margin-left: 1px;
     }
 </style>
 

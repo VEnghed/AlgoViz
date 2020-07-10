@@ -4,12 +4,17 @@
 		width: 80%;
 		display: flex;
 		flex-direction: row;
-		margin-bottom: 4vh;
+		margin-bottom: 6vh;
 	}
 
 	p {
-		margin-top: 3vh;
+		margin-top: 2vh;
+		margin-bottom: 1vh;
 		color: aliceblue;
+	}
+
+	button {
+		margin: 0px;
 	}
 </style>
 
@@ -37,7 +42,7 @@
 	<title>Algoviz</title>
 </svelte:head>
 <p>
-	Right-click to place the start- and end squares. Left click and drag to place walls.
+	Right-click in the rectangle below to place the start- and end squares. Left click and drag to place walls.
 	Click the button to display the shortest path (if any)
 </p>
 <button on:click={find}>Run Algorithm</button>

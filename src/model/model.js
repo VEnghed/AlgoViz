@@ -9,8 +9,6 @@ export default class AlgoWizModel {
         this.end
         this.placing = 'beginning'
 
-
-
         //refactor: break out into method
         for (let x = 0; x < this.grid.length; x++)
             this.grid[x] = new Array(rows)
@@ -50,6 +48,7 @@ export default class AlgoWizModel {
 
     rClick({ x, y }) {
         if (this.grid[x][y].state == 'beginning' || this.grid[x][y].state == 'end') return
+        this.grid[x][y].text = ''
         if (this.placing == 'beginning') {
             if (this.beginning)
                 this.beginning.state = 'default'
@@ -80,31 +79,52 @@ export default class AlgoWizModel {
         for (let i = 1; i < path.length; i++) {
             this.grid[path[i].x][path[i].y].state = 'path'
         }
+
+        path.push(this.end)
+
+        for (let i = 1; i < path.length - 1; i++) {
+            path[i].text = this.getDirection(path[i], path[i - 1])
+            path[i].text += this.getDirection(path[i], path[i + 1])
+        }
     }
+
 
     //which direction do we need to go to get to square2?
     getDirection(square1, square2) {
         let prevVector = { x: square1.x - square2.x, y: square1.y - square2.y }
-
-        if (prevVector.x = 0) {
-
+        switch (prevVector.x) {
+            case 0:
+                //square 2 is either above or below
+                if (prevVector.y == 1) {
+                    return 'U'
+                } else {
+                    return 'D'
+                }
+            case -1:
+                return 'R'
+            case 1:
+                return 'L'
+            default:
+                break;
         }
 
     }
 
-
-
-
-
-
-
-    //deprecated
-    showConnections({ x, y }) {
-        this.grid[x][y].showConnections()
-    }
-    hideConnections({ x, y }) {
-        this.grid[x][y].hideConnections()
-    }
-
-
 }
+
+
+
+
+
+/*
+
+//deprecated
+showConnections({ x, y }) {
+    this.grid[x][y].showConnections()
+}
+hideConnections({ x, y }) {
+    this.grid[x][y].hideConnections()
+}
+
+
+} */

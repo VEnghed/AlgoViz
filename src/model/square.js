@@ -7,22 +7,25 @@ export default class Square {
         this.state = "default"
         this.visited = false
         this.path = []
-        this.text = "x"
+        this.text = ''
     }
 
     click() {
         switch (this.state) {
             case "default":
                 this.state = "clicked"
+                this.text = ""
                 break;
             case "clicked":
                 this.state = "default"
                 break;
             case "highlight":
                 this.state = "clicked"
+                this.text = ""
                 break;
             case "path":
                 this.state = "clicked"
+                this.text = ""
                 break;
             default:
                 break;
@@ -37,6 +40,7 @@ export default class Square {
         if (this.state == 'path' || this.state == 'highlight')
             this.state = 'default'
         this.path = []
+        this.text = ''
     }
 
     showVisited() {

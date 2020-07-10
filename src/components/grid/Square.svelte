@@ -3,11 +3,8 @@
         justify-content: center;
         align-content: center;
         text-align: center;
-        width: 100%;
-        margin-top: 1px;
-        margin-bottom: 1px;
         height: 100%;
-
+        width: 100%;
 
         /* remove later */
         -webkit-touch-callout: none;
@@ -18,6 +15,10 @@
         user-select: none;
     }
 
+    div:hover {
+        box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.15) inset;
+    }
+
     .default {
         background-color: rgb(141, 141, 136);
     }
@@ -25,7 +26,7 @@
     .clicked {
         background-color: rgb(72, 52, 160);
         background-image: url("../wall.svg");
-        background-size: cover;
+        background-size: 100% 100%;
         background-position: center;
         background-repeat: no-repeat;
     }
@@ -37,7 +38,7 @@
     .beginning {
         background-color: rgb(252, 252, 252);
         background-image: url("../beginning.svg");
-        background-size: contain;
+        background-size: 100% 100%;
         background-position: center;
         background-repeat: no-repeat;
     }
@@ -45,17 +46,63 @@
     .end {
         background-color: rgb(252, 252, 252);
         background-image: url("../end.svg");
-        background-size: contain;
+        background-size: 100% 100%;
         background-position: center;
         background-repeat: no-repeat;
     }
 
-    .highlight {
+    .highlight,
+    .path {
         background-color: rgb(142, 226, 135);
     }
 
-    .path {
-        background-color: cornflowerblue;
+
+    .UD,
+    .DU {
+        background-image: url("../path/vline.svg");
+        background-size: 100% 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .LR,
+    .RL {
+        background-image: url("../path/hline.svg");
+        background-size: 100% 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .UR,
+    .RU {
+        background-image: url("../path/ur.svg");
+        background-size: 100% 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .UL,
+    .LU {
+        background-image: url("../path/ul.svg");
+        background-size: 100% 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .LD,
+    .DL {
+        background-image: url("../path/dl.svg");
+        background-size: 100% 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+
+    .DR,
+    .RD {
+        background-image: url("../path/dr.svg");
+        background-size: 100% 100%;
+        background-position: center;
+        background-repeat: no-repeat;
     }
 </style>
 
@@ -90,7 +137,6 @@
 
 </script>
 
-<div class="{model.state}" on:mousedowny={handleClick} on:mouseover={handleMouseOver} ondragstart="return false;"
-    on:contextmenu={handleClick} ondrop="return false;">
-    {model.text}
+<div class="{model.state + ' ' + model.text}" on:mousedowny={handleClick} on:mouseover={handleMouseOver}
+    ondragstart="return false;" on:contextmenu={handleClick} ondrop="return false;">
 </div>
