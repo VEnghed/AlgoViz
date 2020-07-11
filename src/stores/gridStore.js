@@ -1,5 +1,8 @@
+/**
+ * This is a way to wrap a model class/module in a Svelte custom store. 
+ */
+
 import { writable } from 'svelte/store'
-//This is the model that is wrapped in this store.
 import Model from '../model/model'
 
 let model = new Model(32, 16)
@@ -17,15 +20,6 @@ function createStore() {
         rClick: arg => update(model => {
             model.rClick(arg)
             return model
-        })
-        ,
-        showConnections: arg => update(model => {
-            model.showConnections(arg)
-            return model
-        }),
-        hideConnections: arg => update(model => {
-            model.hideConnections(arg)
-            return model
         }),
         showVisited: () => update(model => {
             model.showVisited()
@@ -33,6 +27,10 @@ function createStore() {
         }),
         showPath: (square) => update(model => {
             model.showPath(square)
+            return model
+        }),
+        recreateGrid: (cols, rows) => update(model => {
+            model.createGrid(cols, rows)
             return model
         })
         ,

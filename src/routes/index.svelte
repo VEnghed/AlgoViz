@@ -19,13 +19,14 @@
 </style>
 
 <script>
+	import { onDestroy } from 'svelte';
 	import Column from '../components/grid/Column.svelte'
 	import { gridStore } from '../stores/gridStore'
 	import bfpf from '../stores/breadthFirst.js'
 
 	let model
 
-	gridStore.subscribe(data => {
+	const unsubscribe = gridStore.subscribe(data => {
 		model = data
 	})
 
@@ -36,6 +37,12 @@
 		gridStore.showVisited()
 	}
 
+	function newnew() {
+		gridStore.recreateGrid(4, 2)
+	}
+
+	onDestroy(unsubscribe)
+
 </script>
 
 <svelte:head>
@@ -45,9 +52,11 @@
 	Right-click in the rectangle below to place the start- and end squares. Left click and drag to place walls.
 	Click the button to display the shortest path (if any)
 </p>
+
 <button on:click={find}>Run Algorithm</button>
+
 <div class="back" ondragstart="return false;" ondrop="return false;">
-	{#each model.grid as column}
-			<Column {column}/>
+	{#each model.grid as column, i}
+			<Column column={i}/>
 	{/each}
 </div>

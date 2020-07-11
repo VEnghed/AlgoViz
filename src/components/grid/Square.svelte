@@ -107,19 +107,26 @@
 </style>
 
 <script>
-    export let square;
+    export let x
+    export let y
 
     import Nav from '../Nav.svelte'
+
+    import { onDestroy } from 'svelte';
     import { gridStore } from '../../stores/gridStore'
 
-    let x = square.x
-    let y = square.y
 
     let model
 
-    gridStore.subscribe(data => {
+    /*     const unsubscribe = gridStore.subscribe(data => {
+            model = data.grid[x][y]
+        }) */
+
+    const unsubscribe = gridStore.subscribe(grab)
+
+    function grab(data) {
         model = data.grid[x][y]
-    })
+    }
 
     function handleClick(event) {
         if (event.which == 1) {
@@ -135,6 +142,7 @@
             gridStore.click({ x, y })
     }
 
+    onDestroy(unsubscribe)
 </script>
 
 <div class="{model.state + ' ' + model.text}" on:mousedowny={handleClick} on:mouseover={handleMouseOver}

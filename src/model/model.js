@@ -2,44 +2,41 @@ import Square from './square'
 
 export default class AlgoWizModel {
     constructor(columns, rows) {
+        this.createGrid(columns, rows)
+    }
+
+    createGrid(columns, rows) {
         this.columns = columns
         this.rows = rows
-        this.grid = new Array(columns)
-        this.beginning
-        this.end
+        this.beginning = undefined
+        this.end = undefined
         this.placing = 'beginning'
 
-        //refactor: break out into method
+        this.grid = new Array(columns)
+
         for (let x = 0; x < this.grid.length; x++)
             this.grid[x] = new Array(rows)
 
-        for (let x = 0; x < this.grid.length; x++) {
-            for (let y = 0; y < rows; y++) {
+        for (let x = 0; x < this.grid.length; x++)
+            for (let y = 0; y < rows; y++)
                 this.grid[x][y] = new Square(x, y)
-            }
-        }
 
         for (let x = 0; x < this.grid.length; x++) {
             for (let y = 0; y < rows; y++) {
                 //above
-                if (y > 0) {
+                if (y > 0)
                     this.grid[x][y].connections[0] = this.grid[x][y - 1]
-                }
                 //left
-                if (x > 0) {
+                if (x > 0)
                     this.grid[x][y].connections[1] = this.grid[x - 1][y]
-                }
                 //bottom
-                if (y < rows - 1) {
+                if (y < rows - 1)
                     this.grid[x][y].connections[2] = this.grid[x][y + 1]
-                }
                 //right
-                if (x < columns - 1) {
+                if (x < columns - 1)
                     this.grid[x][y].connections[3] = this.grid[x + 1][y]
-                }
             }
         }
-
     }
 
     click({ x, y }) {
@@ -88,13 +85,10 @@ export default class AlgoWizModel {
         }
     }
 
-
-    //which direction do we need to go to get to square2?
     getDirection(square1, square2) {
         let prevVector = { x: square1.x - square2.x, y: square1.y - square2.y }
         switch (prevVector.x) {
             case 0:
-                //square 2 is either above or below
                 if (prevVector.y == 1) {
                     return 'U'
                 } else {
@@ -107,24 +101,5 @@ export default class AlgoWizModel {
             default:
                 break;
         }
-
     }
-
 }
-
-
-
-
-
-/*
-
-//deprecated
-showConnections({ x, y }) {
-    this.grid[x][y].showConnections()
-}
-hideConnections({ x, y }) {
-    this.grid[x][y].hideConnections()
-}
-
-
-} */
