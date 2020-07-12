@@ -8,6 +8,6 @@ This is the home of <b>Algot Wizzim</b>, the algorithm wizard. He vizualizes alg
 
 ## Things I want to add:
 - DFS, Djikstra and Bellman Ford algorithms
-- Increase and decrease the resolution of the grid
+- ~~Increase and decrease the resolution of the grid~~
 - About page
 - Animated searching
