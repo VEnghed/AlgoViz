@@ -5,7 +5,7 @@
 import { writable } from 'svelte/store'
 import Model from '../model/model'
 
-let model = new Model(32, 16)
+let model = new Model(32)
 
 function createStore() {
     const { subscribe, set, update } = writable(model)
@@ -29,11 +29,14 @@ function createStore() {
             model.showPath(square)
             return model
         }),
-        recreateGrid: (cols, rows) => update(model => {
-            model.createGrid(cols, rows)
+        growGrid: () => update(model => {
+            model.growGrid()
             return model
-        })
-        ,
+        }),
+        shrinkGrid: () => update(model => {
+            model.shrinkGrid()
+            return model
+        }),
         resetHighlights: () => model.resetHighlights(),
         update
     }

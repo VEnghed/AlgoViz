@@ -1,13 +1,14 @@
 import Square from './square'
 
 export default class AlgoWizModel {
-    constructor(columns, rows) {
-        this.createGrid(columns, rows)
+    constructor(columns) {
+        this.createGrid(columns)
     }
 
-    createGrid(columns, rows) {
+    createGrid(columns) {
+        this.grid = undefined
         this.columns = columns
-        this.rows = rows
+        this.rows = columns / 2
         this.beginning = undefined
         this.end = undefined
         this.placing = 'beginning'
@@ -15,14 +16,14 @@ export default class AlgoWizModel {
         this.grid = new Array(columns)
 
         for (let x = 0; x < this.grid.length; x++)
-            this.grid[x] = new Array(rows)
+            this.grid[x] = new Array(this.rows)
 
         for (let x = 0; x < this.grid.length; x++)
-            for (let y = 0; y < rows; y++)
+            for (let y = 0; y < this.rows; y++)
                 this.grid[x][y] = new Square(x, y)
 
         for (let x = 0; x < this.grid.length; x++) {
-            for (let y = 0; y < rows; y++) {
+            for (let y = 0; y < this.rows; y++) {
                 //above
                 if (y > 0)
                     this.grid[x][y].connections[0] = this.grid[x][y - 1]
@@ -30,13 +31,23 @@ export default class AlgoWizModel {
                 if (x > 0)
                     this.grid[x][y].connections[1] = this.grid[x - 1][y]
                 //bottom
-                if (y < rows - 1)
+                if (y < this.rows - 1)
                     this.grid[x][y].connections[2] = this.grid[x][y + 1]
                 //right
                 if (x < columns - 1)
                     this.grid[x][y].connections[3] = this.grid[x + 1][y]
             }
         }
+    }
+
+    growGrid() {
+        if (this.columns >= 64) return
+        this.createGrid(this.columns * 2, this.columns)
+    }
+
+    shrinkGrid() {
+        if (this.columns <= 4) return
+        this.createGrid(this.columns / 2, this.columns / 4)
     }
 
     click({ x, y }) {

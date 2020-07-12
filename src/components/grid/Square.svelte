@@ -13,6 +13,7 @@
         -moz-user-select: none;
         -ms-user-select: none;
         user-select: none;
+        box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.05) inset;
     }
 
     div:hover {
@@ -107,26 +108,16 @@
 </style>
 
 <script>
-    export let x
-    export let y
+    export let square
 
+    let x = square.x
+    let y = square.y
+
+    //no idea why it stops working when i remove this import.
     import Nav from '../Nav.svelte'
 
-    import { onDestroy } from 'svelte';
     import { gridStore } from '../../stores/gridStore'
 
-
-    let model
-
-    /*     const unsubscribe = gridStore.subscribe(data => {
-            model = data.grid[x][y]
-        }) */
-
-    const unsubscribe = gridStore.subscribe(grab)
-
-    function grab(data) {
-        model = data.grid[x][y]
-    }
 
     function handleClick(event) {
         if (event.which == 1) {
@@ -141,10 +132,8 @@
         if (event.buttons == 1)
             gridStore.click({ x, y })
     }
-
-    onDestroy(unsubscribe)
 </script>
 
-<div class="{model.state + ' ' + model.text}" on:mousedowny={handleClick} on:mouseover={handleMouseOver}
+<div class="{square.state + ' ' + square.text}" on:mousedown={handleClick} on:mouseover={handleMouseOver}
     ondragstart="return false;" on:contextmenu={handleClick} ondrop="return false;">
 </div>

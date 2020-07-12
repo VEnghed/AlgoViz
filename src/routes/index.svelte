@@ -5,12 +5,14 @@
 		display: flex;
 		flex-direction: row;
 		margin-bottom: 6vh;
+		box-shadow: -10px 10px 10px 0px rgba(0, 0, 0, 0.1);
 	}
 
 	p {
 		margin-top: 2vh;
-		margin-bottom: 1vh;
+		margin-bottom: 0.5vh;
 		color: aliceblue;
+		text-align: center;
 	}
 
 	button {
@@ -37,16 +39,12 @@
 		gridStore.showVisited()
 	}
 
-	function newnew() {
-		gridStore.recreateGrid(4, 2)
-	}
-
 	onDestroy(unsubscribe)
 
 </script>
 
 <svelte:head>
-	<title>Algoviz</title>
+	<title>AlgoWiz</title>
 </svelte:head>
 <p>
 	Right-click in the rectangle below to place the start- and end squares. Left click and drag to place walls.
@@ -56,7 +54,7 @@
 <button on:click={find}>Run Algorithm</button>
 
 <div class="back" ondragstart="return false;" ondrop="return false;">
-	{#each model.grid as column, i}
-			<Column column={i}/>
+	{#each model.grid as column}
+			<Column {column}/>
 	{/each}
 </div>
